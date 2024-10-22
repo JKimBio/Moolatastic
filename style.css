@@ -1,0 +1,99 @@
+var messages = [],
+  lastUserMessage = "", 
+  botMessage = "", 
+  botName = 'Theodore the Chatbot', 
+  talking = true; 
+function chatbotResponse() {
+  talking = true;
+  botMessage = "I'm confused. Type things such as, Budget, Banking, Insurance, and more. If you're scared you can trust us. :)"; 
+
+  if (lastUserMessage === 'Hi' || lastUserMessage =='hello') {
+    const hi   = ['Hey there how may we help you!']
+    botMessage = hi[Math.floor(Math.random()*(hi.length))];;
+  }
+
+   if (lastUserMessage.toLowerCase().includes("budget")) {
+    botMessage = 'Budgeting is amongst one of the key factors to being wealthy. Instead of spending lots of money, its time people should budget. Thus being you could have enough money for necessities such as Bills, Insurance and more. ';
+  }
+  if (lastUserMessage.toLowerCase().includes("deadlines")) {
+    botMessage = 'Deadlines are very important. People have to learn how to be on top of things! With the concerns of not paying things on time, a lot of people usually dont meet the deadlines due to spending too much money.';
+ }
+  if (lastUserMessage.toLowerCase().includes("david")) {
+    botMessage = 'Really gay boy that plays bassoon ';
+ }
+  if (lastUserMessage.toLowerCase().includes("trust")) {
+    botMessage = 'Moolatastic is a trustable app, with its many features, we DO NOT give out information or ask for any information such as card #, social security etc.. We only give out advice thats it! So dont be scared :). ';
+  }
+if (lastUserMessage.toLowerCase().includes("banking")) {
+    botMessage = 'Your Bank Account is by far the most important, its where everything comes from. You deposit funds here, you gain credit cards for credit scores here, and the most critical would be logging down receipts. Without receipts, there wouldnt be tax refunds thus having gain less money than you would already have if no taxes are introduced. Some tips is to 1. Reevaluate your bank account | 2. Dont assume your bank is giving you the best rate. | 3. Dont let a high rate fool you. | 4. Trust in T.I.P.S';
+  }
+  if (lastUserMessage.toLowerCase().includes("insurance")) {
+    botMessage = 'Insurance policies have a cash value component that can grow over time. Borrowing funds: Instead of paying the premiums out of pocket, the policyholder borrows funds from a third-party lender, often a bank or a specialized finance company. These borrowed funds cover the insurance premiums. Some tools that would help you are the 4 analysis techniques. These techniques are called, Fundamental Analysis, Technical Analysis, Quantitative Analysis, and Statistical and Numerical Analysis. These all can help you manage your insurance just for RISK management.';
+  }
+  if (lastUserMessage.toLowerCase().includes("fuck")) {
+    botMessage = 'Thats not nice, I am currently sending an email to all of your teachers, parents, and the police. You\'re fucked kid. 10. 9. 8. 7. 6. 5. 4. 3. 2. 1. ';
+  }
+  if (lastUserMessage.toLowerCase().includes("xavier")) {
+    botMessage = 'Xavier is a very hot muscular man who orders everything off of Mrs. Takara\'s menu';
+  }
+  if (lastUserMessage.toLowerCase().includes("takara")) {
+    botMessage = 'The best teacher in the world. She acts like a mother to us and deeply cares for us. When the time comes, she\'ll be scary and get angry at us. However we all love her and want to make her proud :D';
+  }
+if (lastUserMessage.toLowerCase().includes("menu")) {
+    botMessage = 'uesawupa Combo $4.99 Wockstaw Punched Fweeze $2.49 Quesawupa $2.99 Cheesy Gowdita Cwunch $2.79 Dowitos Cheesy Gowdita Cwunch $2.99 Nacho Cheese Dowitos Wocos Tacos $1.49 Nacho Cheese Dowitos Wocos Tacos Supweme $1.79 Fiewy Dowitos Wocos Tacos $1.49 Fiewy Dowitos Wocos Tacos Supweme $1.79 Coow Wanch Dowitos Wocos Tacos $1.49 Coow Wanch Dowitos Wocos Tacos Supweme $1.79 Cwunchy Taco $1.19 Cwunchy Taco Supweme $1.59 Soft Taco $1.19 Soft Taco Supweme $1.59 Chicken Soft Taco $1.69 Gwiwwed Steak Soft Taco $2.49 Beefy 5 Wayew Buwwito $2.49 Doubwe Deckew Taco $1.79 Doubwe Deckew Taco Supweme $2.19 Smaww Soft Dwink- 20 oz $1.59 Medium Soft Dwink- 30 oz $1.89 Wawge Soft Dwink- 40 oz $1.99';
+  }
+}
+
+
+
+function newEntry() {
+  if (document.getElementById("chatbox").value != "") {
+    
+    lastUserMessage = document.getElementById("chatbox").value;
+    document.getElementById("chatbox").value = "";
+    
+    messages.push(lastUserMessage);
+    
+    chatbotResponse();
+    
+    messages.push("<b>" + botName + ":</b> " + botMessage);
+    
+    Speech(botMessage);
+    
+    for (var i = 1; i < 8; i++) {
+      if (messages[messages.length - i])
+        document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
+    }
+  }
+}
+
+
+function Speech(say) {
+  if ('speechSynthesis' in window && talking) {
+    var utterance = new SpeechSynthesisUtterance(say);
+    
+    
+    speechSynthesis.speak(utterance);
+  }
+}
+
+
+document.onkeypress = keyPress;
+
+function keyPress(e) {
+  var x = e || window.event;
+  var key = (x.keyCode || x.which);
+  if (key == 13 || key == 3) {
+    
+    newEntry();
+  }
+  if (key == 38) {
+    console.log('hi')
+      
+  }
+}
+
+function placeHolder() {
+  document.getElementById("chatbox").placeholder = "";
+
+}
